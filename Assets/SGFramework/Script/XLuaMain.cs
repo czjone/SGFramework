@@ -4,6 +4,7 @@ namespace SGF
     using System.Collections;
     using System.Collections.Generic;
     using UnityEngine;
+    using SGF.Unity;
 
     public class XLuaMain : MonoBehaviour
     {
@@ -13,7 +14,7 @@ namespace SGF
 
         void Start()
         {
-            resMgr = ResMgr.GetInstance();
+            resMgr = new ResMgr(this);
             luaEnv = new XLua.LuaEnv();
             byte[] luaBytes = resMgr.GetRes("main");
             string luaString = System.Text.UTF8Encoding.UTF8.GetString(luaBytes);
@@ -31,6 +32,7 @@ namespace SGF
             if (luaEnv != null)
             { 
                 luaEnv.Dispose();
+                this.luaEnv = null;
             }
         }
        
