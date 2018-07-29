@@ -18,7 +18,10 @@
 		// Use this for initialization
 		void Start () {
 			this.Manager.Lua.AddLuaSearchPath (Application.persistentDataPath);
-			this.Manager.Lua.AddLuaSearchPath (Application.persistentDataPath + Core.Path.DirSplitor + HotUpdate.TaskDecompressionPKGRes.DresFolder);
+			var downloadDir = Application.persistentDataPath + Core.Path.DirSplitor + HotUpdate.TaskDecompressionPKGRes.DresFolder;
+			this.Manager.Lua.AddLuaSearchPath (downloadDir);
+			this.Manager.Lua.AddLuaSearchPath (downloadDir + "/src");
+			this.Manager.Lua.AddLuaSearchPath (downloadDir + "/res");
 			this.Manager.Lua.RunLuaModel ("src.main");
 		}
 

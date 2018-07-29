@@ -81,7 +81,7 @@
 				while (index < pkgFiles.Length) {
 					var bytes = resMgr.GetStreamAssetsBytes (dresRoot + pkgFiles[index].Path);
 					resMgr.WritePersistentDataBytes (dresRoot + pkgFiles[index].Path, bytes);
-					Debug.Log ("Decompress File From PKG:" + dresRoot + pkgFiles[index].Path);
+					Debug.Log ("[Unity Log] Decompress PKG Files:" + dresRoot + pkgFiles[index].Path);
 					if (OnStateChangedEvent != null) {
 						args.Percent = (index + 1.0f) / (float) pkgFiles.Length;
 						args.Des = string.Format (lag.CHECK_DECOMPRESS_PKG_RES_TASK_DES, (args.Percent * 100).ToString ("0.00"));
@@ -114,7 +114,8 @@
 					return pkgVer.Version > localVer.Version
 #if UNITY_EDITOR
 						||
-						pkgVer.devVersion > localVer.devVersion
+						//pkgVer.devVersion > localVer.devVersion
+						true //编辑器模式下强制更行
 #endif
 					;
 				}
