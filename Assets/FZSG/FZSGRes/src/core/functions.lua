@@ -1,7 +1,7 @@
 
 function print( ... )
     arg = { ... } ;
-    local val =  "";
+    local val =  "[SGF PRINT(Lua)]";
     for k,v in pairs(arg) do  val = val .. v ..","; end
     CS.UnityEngine.Debug.Log(val);
 end

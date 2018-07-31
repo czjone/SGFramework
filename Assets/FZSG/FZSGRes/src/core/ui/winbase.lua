@@ -1,5 +1,16 @@
 local Winbase = {}
 
+Winbase.root = nil;
+
+function Winbase:ctor()
+
+end
+
+--- 加载资源
+function Winbase:onLoadResource()
+
+end
+
 function Winbase:onInit()
 
 end
