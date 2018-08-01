@@ -190,6 +190,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  LuaActionName: vvvvvvvv
 --- !u!114 &766501427
 MonoBehaviour:
   m_ObjectHideFlags: 0
