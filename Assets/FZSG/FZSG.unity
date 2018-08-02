@@ -157,7 +157,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 766501424}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b284d9363a2f9443b90d40c0e1f932c, type: 3}
+  m_Script: {fileID: 11500000, guid: 3aa32e6f885f6a347835a234f459fc61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -190,7 +190,8 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  LuaActionName: vvvvvvvv
+  Lua:
+    InvorkActionName: self.invork
 --- !u!114 &766501427
 MonoBehaviour:
   m_ObjectHideFlags: 0

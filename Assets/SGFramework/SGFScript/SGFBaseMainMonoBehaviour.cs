@@ -13,14 +13,16 @@
             }
         }
 
-        virtual protected void Awake () {
+        public SGFBaseMainMonoBehaviour () {
             this.Manager = new SGFManager (this);
+        }
+
+        virtual protected void Awake () {
             this.gameObject.name = UIRootName;
         }
 
-        
-		virtual protected void OnDestroy () {
-			this.Manager.Dispose ();
-		}
+        virtual protected void OnDestroy () {
+            this.Manager.Dispose ();
+        }
     }
 }

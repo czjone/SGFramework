@@ -4,9 +4,7 @@
 	using System.Collections;
 	using UnityEngine;
 
-
-	[XLua.LuaCallCSharp]
-	public class UICompnentLuaHander : MonoBehaviour {
+	public class LuaUIEvenListener : MonoBehaviour {
 		public string LuaHandlerName;
 
 		public void EventHandler() {
