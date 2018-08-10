@@ -6,8 +6,11 @@
 	using XLua;
 
 	public class LuaRunner : System.IDisposable {
+		
 		public XLua.LuaEnv LuaEnv { get; private set; }
+
 		public SGFManager Manager { get; private set; }
+
 		public LuaRunner (SGFManager manager) {
 			this.Manager = manager;
 			this.LuaEnv = new LuaEnv ();
