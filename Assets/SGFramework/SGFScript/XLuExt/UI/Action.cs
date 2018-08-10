@@ -1,7 +1,7 @@
 ﻿namespace SGF.XLuaUI {
 
 	[System.Serializable]
-	public class XLuaUIAction {
+	public class Action {
 		public string InvorkActionName;
 	}
 

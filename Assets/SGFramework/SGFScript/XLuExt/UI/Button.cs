@@ -3,8 +3,8 @@
     using System.Collections;
     using UnityEngine;
 
-    public class XLuaUIButton : UnityEngine.UI.Button {
-        public XLuaUIAction Lua;
+    public class Button : UnityEngine.UI.Button {
+        public SGF.XLuaUI.Action Lua;
 
         private void Awake () {
             this.onClick.AddListener (this.InvorkLuaHandler);
