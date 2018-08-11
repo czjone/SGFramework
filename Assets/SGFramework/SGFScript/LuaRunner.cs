@@ -5,8 +5,10 @@
 	using UnityEngine;
 	using XLua;
 
+	public delegate byte[] LuaLoader (ref string luaPath);
+
 	public class LuaRunner : System.IDisposable {
-		
+
 		public XLua.LuaEnv LuaEnv { get; private set; }
 
 		public SGFManager Manager { get; private set; }
@@ -27,6 +29,10 @@
 
 		public void Run (string model) {
 			this.Require (model);
+		}
+
+		public void AddLuaLoader (LuaLoader loader) {
+			this.LuaEnv.AddLoader ((ref string x) => loader (ref x));
 		}
 
 		public void AddLuaSearchPath (string searchpath) {
