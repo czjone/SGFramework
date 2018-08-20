@@ -25,6 +25,7 @@
 
 		[System.Serializable]
 		public class ResVersion : SGF.Core.JsonSerializable<ResVersion> {
+
 			public int Version { get; set; }
 
 			public int devVersion { get; set; }
@@ -37,7 +38,9 @@
 		}
 
 		public class TaskCheckRes : IRunnerTask {
+
 			public event RunnerStateChangedAction OnStateChangedEvent;
+
 			public event RunnerComplateAction OnComplateEvent;
 
 			public void StartAsy () {

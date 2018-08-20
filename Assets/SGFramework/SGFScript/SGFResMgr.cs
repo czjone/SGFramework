@@ -7,6 +7,7 @@
 
 	[XLua.LuaCallCSharp]
 	public class ResMgr : System.IDisposable {
+
 		public List<string> SearchPath { get; private set; }
 
 		public ResMgr () {
@@ -71,7 +72,7 @@
 		public void WritePersistentDataBytes (string fname, byte[] bytes) {
 			string path = Application.persistentDataPath + Path.DirSplitor + Path.Legalization (fname);
 			string dir = path.Substring (0, path.Length - System.IO.Path.GetFileName (path).Length);
-			System.IO.Directory.CreateDirectory(dir);
+			System.IO.Directory.CreateDirectory (dir);
 			System.IO.File.WriteAllBytes (path, bytes);
 		}
 

@@ -17,7 +17,6 @@
 			taskMgr.OnComplateEvent += this.OnComplate;
 		}
 		void Start () {
-
 			taskMgr.StartAsy ();
 		}
 

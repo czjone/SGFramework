@@ -9,7 +9,7 @@ namespace SGF {
 
             [System.NonSerialized]
             private static Language instance;
-            
+
             public static Language GetInstance () {
                 if (instance == null) {
                     var txtAsset = Resources.Load<TextAsset> (languageFilePath);

@@ -10,34 +10,6 @@
 		using UnityEngine;
 
 		public class File {
-			// /// <summary>
-			// /// Copies the directory.
-			// /// </summary>
-			// /// <param name="sPath">S path.</param>
-			// /// <param name="dPath">D path.</param>
-			// /// <param name="onCopyFileAction">On copy file action.</param>
-			// public static void CopyDirectory (string sPath, string dPath, Action<string> onCopyFileAction = null) {
-			// 	if (!System.IO.Directory.Exists (dPath))
-			// 		System.IO.Directory.CreateDirectory (dPath);
-			// 	System.IO.DirectoryInfo dir = new System.IO.DirectoryInfo (sPath);
-			// 	System.IO.DirectoryInfo[] dirs = dir.GetDirectories ();
-			// 	CopyFile (dir, dPath);
-			// 	if (onCopyFileAction != null) onCopyFileAction.Invoke (dPath);
-
-			// 	if (dirs.Length > 0) {
-			// 		foreach (System.IO.DirectoryInfo temDirectoryInfo in dirs) {
-			// 			string sourceDirectoryFullName = temDirectoryInfo.FullName;
-			// 			string destDirectoryFullName = sourceDirectoryFullName;
-			// 			if (!System.IO.Directory.Exists (destDirectoryFullName)) {
-			// 				System.IO.Directory.CreateDirectory (destDirectoryFullName);
-			// 			}
-			// 			CopyFile (temDirectoryInfo, destDirectoryFullName);
-			// 			CopyDirectory (sourceDirectoryFullName, destDirectoryFullName);
-			// 		}
-			// 	}
-
-			// }
-
 			/// <summary>
 			/// 复制文件夹中的所有内容
 			/// </summary>

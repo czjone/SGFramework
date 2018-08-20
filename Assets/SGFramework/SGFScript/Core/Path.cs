@@ -7,18 +7,11 @@
 		public class Path {
 
 			public static string DirSplitor {
-				get {
-					return "/";
-
-				}
+				get { return "/"; }
 			}
 
 			public static string UnDirSplitor {
-				get {
-
-					return "\\";
-
-				}
+				get { return "\\"; }
 			}
 
 			public static string Legalization (string rawPath) {

@@ -82,25 +82,5 @@
 			}
 		}
 
-		public class JsonSerializable<T> where T : class, new () {
-			public static T LoadWithJson (string json) {
-				return JsonConvert.DeserializeObject<T>(json);
-			}
-
-			public static T LoadWithFile (string fname) {
-				string json = System.IO.File.ReadAllText (fname);
-				return JsonConvert.DeserializeObject<T>(json);
-			}
-
-			public string ToJson () {
-				return JsonConvert.SerializeObject (this);
-			}
-
-			public void ToFile (string fname) {
-				string json = this.ToJson ();
-				System.IO.File.WriteAllText (fname, json);
-			}
-
-		}
 	}
 }

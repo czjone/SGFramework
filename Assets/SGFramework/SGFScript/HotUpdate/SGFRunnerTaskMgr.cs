@@ -1,18 +1,18 @@
 ﻿namespace SGF {
 
 	using System.Collections.Generic;
-    using UnityEngine;
+	using UnityEngine;
 
-    public class RunnerStateChangedEventArgs : System.EventArgs {
-		public string Name { get;  set; }
+	public class RunnerStateChangedEventArgs : System.EventArgs {
+		public string Name { get; set; }
 
 		/// <summary>
 		/// current processed percent.
 		/// </summary>
 		/// <value>0~1</value>
-		public float Percent { get;  set; }
+		public float Percent { get; set; }
 
-		public string Des { get;  set; }
+		public string Des { get; set; }
 
 		public RunnerStateChangedEventArgs (float percent, string Name, string des) {
 			this.Name = Name;
@@ -92,7 +92,7 @@
 				}
 			} else {
 				this.currentTask = this.tasks.Dequeue ();
-				this.currentTask.StartAsy();
+				this.currentTask.StartAsy ();
 			}
 		}
 

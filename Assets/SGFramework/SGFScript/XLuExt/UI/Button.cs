@@ -5,7 +5,6 @@
 
     public class Button : UnityEngine.UI.Button {
         public SGF.XLuaUI.Action Lua;
-
         private void Awake () {
             this.onClick.AddListener (this.InvorkLuaHandler);
         }
@@ -14,5 +13,4 @@
             SGF.Unity.ULog.D (this.Lua.InvorkActionName);
         }
     }
-
 }

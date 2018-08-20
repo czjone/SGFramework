@@ -8,9 +8,7 @@
 
         private string _UIRootName = "UIMainCamera";
         protected string UIRootName {
-            get {
-                return _UIRootName;
-            }
+            get { return _UIRootName; }
         }
 
         public SGFBaseMainMonoBehaviour () {

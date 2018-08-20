@@ -20,7 +20,6 @@ namespace SGF.Core
         /// </summary>
         public class Md5
         {
-
             /// <summary>
             /// 生成字符串的SHA1码
             /// </summary>
