@@ -1,14 +1,13 @@
-﻿namespace SGF {
+﻿namespace SGF.Unity {
 
 	using System.Collections.Generic;
 	using System.Collections;
 	using SGF.Core;
 	using UnityEngine;
 
-	[XLua.LuaCallCSharp]
 	public class ResMgr : System.IDisposable {
 
-		public List<string> SearchPath { get; private set; }
+		// public List<string> SearchPath { get; private set; }
 
 		public ResMgr () {
 

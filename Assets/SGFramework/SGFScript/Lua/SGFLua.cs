@@ -1,12 +1,15 @@
-﻿namespace SGF {
+﻿namespace SGF.Lua {
 
 	using System.Collections.Generic;
 	using System.Collections;
 	using UnityEngine;
 	using XLua;
 
+	[LuaCallCSharp]
+	[CSharpCallLua]
 	public delegate byte[] LuaLoader (ref string luaPath);
 
+	[LuaCallCSharp]
 	public class LuaRunner : System.IDisposable {
 
 		public XLua.LuaEnv LuaEnv { get; private set; }
@@ -37,12 +40,12 @@
 
 		public void AddLuaSearchPath (string searchpath) {
 			//package.path = '/usr/local/share/lua/5.1/?.lua;/home/resty/?/init.lua;'
-			string setSearchPathLua = "package.path = package.path..\";" + searchpath + "/?.lua\"";
-			setSearchPathLua += "package.path = package.path..\";" + searchpath + "/?.lc\"";
-			setSearchPathLua += "package.path = package.path..\";" + searchpath + "/?.luac\"";
-			setSearchPathLua += "package.path = package.path..\";" + searchpath + "/?/init.lua\";";
-			setSearchPathLua += "package.path = package.path..\";" + searchpath + "/?/init.lc\"";
-			setSearchPathLua += "package.path = package.path..\";" + searchpath + "/?/init.luac\"";
+			string setSearchPathLua = 		"package.path = package.path..\";" + searchpath + "/?.lua\"";
+			setSearchPathLua += 			"package.path = package.path..\";" + searchpath + "/?.lc\"";
+			setSearchPathLua += 			"package.path = package.path..\";" + searchpath + "/?.luac\"";
+			setSearchPathLua += 			"package.path = package.path..\";" + searchpath + "/?/init.lua\";";
+			setSearchPathLua += 			"package.path = package.path..\";" + searchpath + "/?/init.lc\"";
+			setSearchPathLua += 			"package.path = package.path..\";" + searchpath + "/?/init.luac\"";
 			this.LuaEnv.DoString (setSearchPathLua);
 		}
 

@@ -1,10 +1,11 @@
-﻿namespace SGF {
+﻿namespace SGF.Lua {
 
 	using System.Collections.Generic;
 	using System.Collections;
 	using UnityEngine;
+	using XLua;
 
-	[XLua.LuaCallCSharp]
+	[LuaCallCSharp]
 	public class SGFManager : System.IDisposable {
 
 		public ResMgr ResMgr { get; private set; }
@@ -15,8 +16,8 @@
 
 		public SGFManager (MonoBehaviour bev) {
 			this.Bev = bev;
-			this.ResMgr = new SGF.ResMgr ();
-			this.Lua = new SGF.LuaRunner (this);
+			this.ResMgr = new SGF.Lua.ResMgr ();
+			this.Lua = new SGF.Lua.LuaRunner (this);
 		}
 
 		public void Dispose () {

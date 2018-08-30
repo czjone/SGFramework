@@ -3,5 +3,5 @@
     "BuildResDir": "res",
     "DevScriptDir": "Assets/FZSG/FZSGRes/src",
     "BuildScriptDir": "src",
-    "IsPublic": false /**为true会修改发布的版本号，为false只会修改开发版本号**/
+    "IsPublic": false /** 为true会修改发布的版本号，为false只会修改开发版本号 **/
 }
