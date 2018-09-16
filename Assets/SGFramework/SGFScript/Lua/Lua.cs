@@ -130,20 +130,21 @@
 	public sealed class LuaTick {
 
 		private SGFLua SGFLua;
-		private int msCounter = 0;
+		private System.DateTime preDoTime;
 
 		public LuaTick (SGFLua lua) {
 			this.SGFLua = lua;
 		}
 
 		public void DoTick () {
-			// var currentTimeMs = System.DateTime.Now.Millisecond;
-			// if (msCounter > 0) {
-			// 	var luaDoTick = this.SGFLua.LuaEnv.Global.Get<string,LuaTimeTick> ("LuaTimeTick");
-			// 	if(luaDoTick == null) throw new LuaException("not set global lua function 'LuaTimeTick' to supports timer tickor!");
-			// 	luaDoTick.Invoke (currentTimeMs - msCounter);
-			// }
-			// this.msCounter = currentTimeMs;
+			var current = System.DateTime.Now;
+			if (preDoTime != null) {
+				var luaDoTick = this.SGFLua.LuaEnv.Global.Get<string,LuaTimeTick> ("LuaTimeTick");
+				if(luaDoTick == null) throw new LuaException("not set global lua function 'LuaTimeTick' to supports timer tickor!");
+				var timespan = current - preDoTime;
+				luaDoTick.Invoke (timespan.Milliseconds);
+			}
+			this.preDoTime = current;
 		}
 	}
 }

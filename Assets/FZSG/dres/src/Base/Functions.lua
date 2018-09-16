@@ -6,7 +6,7 @@ function setPrintPower(showLog)
         _G["print"] = function ( ... )
             arg = { ... } ;
             local val =  "SGF LUA:";
-            for k,v in pairs(arg) do  val = val .. v .."    "; end
+            for k,v in pairs(arg) do  val = val .. tostring(v) .."    "; end
             CS.UnityEngine.Debug.Log(val);
         end 
 
@@ -210,7 +210,7 @@ function class(classname, ...)
         cls.ctor = function()
         end
     end
-    cls.new = function(...)
+    cls.new = function(_,...)
         local instance
         if cls.__create then
             instance = cls.__create(...)
