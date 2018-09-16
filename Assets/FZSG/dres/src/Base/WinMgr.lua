@@ -1,12 +1,12 @@
 local WinMgr = {}
 local UIUtil = require("Base.UIUtil");
-local UIRoot = SGF.UIRoot; -- 在main中定义的
+local UIRoot = SGFGame.UIRoot; -- 在main中定义的
 
 function WinMgr.open(win,...)
     if(type(win) == "string")then
         local win = require(win):new();
-        assert(UIRoot ~= nil, "UI Root is nil");
-        assert(win ~= nil, "create windows fail.",win);
+        if(UIRoot == nil) then error("UI Root is nil") end
+        if(win == nil) then error("create windows fail.") end;
         UIUtil.AddChild(UIRoot,win);
         win:show();
     else

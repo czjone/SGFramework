@@ -1,21 +1,15 @@
 --- SGF lua api
 local function initEnv()
-    --- 注册全局API,接口来自于RootBehaviour.cs的注册
-    SGF = {
-        RootBehaviour = RootBehaviour,
-        UICamera = RootBehaviour.gameObject,
-        Lua = RootBehaviour.Game.Lua,
-        UIRoot = RootBehaviour.UIRoot,
-    }
+    local game = SGFGame; -- SGFGame Resigter in Game.cs
     --- 资源ROOT
-    local resRoot = CS.SGF.Core.Path.Legalization(SGF.RootBehaviour.ResRoot.."/FZSGRes");
-    --- 脚本目录
+    local resRoot = game.ResRoot;
     local src = CS.SGF.Core.Path.Legalization(resRoot .. "/src");
-    --- 资源目录
     local res = CS.SGF.Core.Path.Legalization(resRoot .. "/res");
+
     --- 添加Lua搜索目录
-    SGF.Lua:AddLuaSearchPath(src);
-    SGF.Lua:AddLuaSearchPath(res);
+    -- game.Lua.AddLuaSearchPath(resRoot);
+    game.Lua:AddLuaSearchPath(src);
+    game.Lua:AddLuaSearchPath(res);
 end
 
 local function loadBaseLib()

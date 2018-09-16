@@ -15,8 +15,8 @@ function PrefabWinBase:loadUIAsy(callback)
     PrefabWinBase.super.loadUIAsy(self,callback);
 end
 
-function PrefabWinBase:UIReady()
-    PrefabWinBase.super.UIReady(self);
+function PrefabWinBase:onUIReady()
+    PrefabWinBase.super.onUIReady(self);
 end
 
 function PrefabWinBase:show()

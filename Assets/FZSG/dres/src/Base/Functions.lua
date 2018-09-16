@@ -18,11 +18,12 @@ end
 --     print(string.format(tostring(fmt), ...))
 -- end
 
-function assert(exp,...)
-    if(exp == false) then
-        print(...);
-    end
-end
+-- function assert(exp,msg)
+--     if(exp == false) then
+--         --print(...);
+--         error("assert fail:".. msg);
+--     end
+-- end
 
 function tostring_table(o, s, isArray)
     s = s or ''

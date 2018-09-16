@@ -6,8 +6,8 @@ function WinBase:ctor()
     WinBase.super.ctor(self);
 end
 
-function WinBase:UIReady()
-    WinBase.super.UIReady(self);
+function WinBase:onUIReady()
+    WinBase.super.onUIReady(self);
 end
 
 function WinBase:setName(nm)

@@ -2,15 +2,15 @@ local UIUtil = {}
 local UIHelper = CS.SGF.Lua.UI.UIHelper.GetInstance();
 
 function UIUtil.SetText( utxtGo,val )
-    UIHelper.SetText(utxtGo,val);
+    UIHelper:SetText(utxtGo,val);
 end
 
 function UIUtil.SetVisible(uGo,visible)
-    UIHelper.SetVisible(uGo,visible);
+    UIHelper:SetVisible(uGo,visible);
 end
 
 function UIUtil.SetImage(uImgGo,uSprite)
-    UIHelper.SetImage(uImgGo,uSprite);
+    UIHelper:SetImage(uImgGo,uSprite);
 end
 
 --- PS:同时支持uinode和luanode
@@ -18,10 +18,10 @@ function UIUtil.RemoveFromeParent(node,destroy)
     local go = node.uiroot;
     if(go) then 
         assert(node:getParent() ~=nil, "node 还没有添加到父节点中.");
-        UIHelper.RemoveFromeParent(go, destroy == true);
+        UIHelper:RemoveFromeParent(go, destroy == true);
         node:onRemoveFromStage();
     else
-        UIHelper.RemoveFromeParent(node, destroy == true);
+        UIHelper:RemoveFromeParent(node, destroy == true);
     end
 end
 
@@ -45,6 +45,10 @@ end
 
 function UIUtil.LoadPrefab(nm)
     return UIHelper:LoadPrefab(nm);
+end
+
+function UIUtil.DeepFindChild(parentGo,childnm) 
+    return UIHelper:DeepFindChild(parentGo,childnm);
 end
 
 return UIUtil;
