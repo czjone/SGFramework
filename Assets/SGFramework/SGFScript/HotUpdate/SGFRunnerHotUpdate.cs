@@ -3,6 +3,7 @@
 	namespace HotUpdate {
 		using System.Collections.Generic;
 		using System.Collections;
+		using SGF.Unity;
 		using UnityEngine;
 
 		[System.Serializable]
@@ -24,7 +25,7 @@
 		}
 
 		[System.Serializable]
-		public class ResVersion : SGF.Core.JsonSerializable<ResVersion> {
+		public class ResVersion : SGF.Unity.JsonSerializable<ResVersion> {
 
 			public int Version { get; set; }
 
@@ -78,12 +79,12 @@
 			private IEnumerator TaskProcessor () {
 				var pkgFiles = this.GetNeedDecompressFiles ();
 				int index = 0;
-				ResMgr resMgr = new ResMgr ();
+				FileUtils fileUtils = FileUtils.GetInstance ();
 				RunnerStateChangedEventArgs args = new RunnerStateChangedEventArgs (0);
 				string dresRoot = DresFolder + Core.Path.DirSplitor;
 				while (index < pkgFiles.Length) {
-					var bytes = resMgr.GetStreamAssetsBytes (dresRoot + pkgFiles[index].Path);
-					resMgr.WritePersistentDataBytes (dresRoot + pkgFiles[index].Path, bytes);
+					var bytes = fileUtils.GetStreamAssetsBytes (dresRoot + pkgFiles[index].Path);
+					fileUtils.WritePersistentDataBytes (dresRoot + pkgFiles[index].Path, bytes);
 					Debug.Log ("[Unity Log] Decompress PKG Files:" + dresRoot + pkgFiles[index].Path);
 					if (OnStateChangedEvent != null) {
 						args.Percent = (index + 1.0f) / (float) pkgFiles.Length;
@@ -94,7 +95,7 @@
 					yield return null;
 				}
 				var newVersionStr = this.pkgVer.ToJson ();
-				resMgr.WritePersistentDataString (dresRoot + HotUpdate.ResVersion.VerFileName, newVersionStr);
+				fileUtils.WritePersistentDataString (dresRoot + HotUpdate.ResVersion.VerFileName, newVersionStr);
 				this.TrigerComplateEvent ();
 				yield return null;
 			}
@@ -106,22 +107,22 @@
 			}
 
 			private bool GetNeedDecompressState () {
-				using (ResMgr mgr = new ResMgr ()) {
-					var dresroot = DresFolder + Core.Path.DirSplitor;
-					string locaJson = mgr.GetPersistentDataString (dresroot + HotUpdate.ResVersion.VerFileName);
-					string pkgJson = mgr.GetStreamAssetsString (dresroot + HotUpdate.ResVersion.VerFileName);
-					localVer = HotUpdate.ResVersion.LoadWithJson (locaJson ?? "{}");
-					localVer.ResVer = localVer.ResVer ?? new HotUpdate.FileVersion[0];
-					pkgVer = HotUpdate.ResVersion.LoadWithJson (pkgJson ?? "{}");
-					pkgVer.ResVer = pkgVer.ResVer ?? new HotUpdate.FileVersion[0];
-					return pkgVer.Version > localVer.Version
+				FileUtils fileUtils = FileUtils.GetInstance ();
+				var dresroot = DresFolder + Core.Path.DirSplitor;
+				string locaJson = fileUtils.GetPersistentDataString (dresroot + HotUpdate.ResVersion.VerFileName);
+				string pkgJson = fileUtils.GetStreamAssetsString (dresroot + HotUpdate.ResVersion.VerFileName);
+				localVer = HotUpdate.ResVersion.LoadWithJson (locaJson ?? "{}");
+				localVer.ResVer = localVer.ResVer ?? new HotUpdate.FileVersion[0];
+				pkgVer = HotUpdate.ResVersion.LoadWithJson (pkgJson ?? "{}");
+				pkgVer.ResVer = pkgVer.ResVer ?? new HotUpdate.FileVersion[0];
+				return pkgVer.Version > localVer.Version
 #if UNITY_EDITOR
-						||
-						//pkgVer.devVersion > localVer.devVersion
-						true //编辑器模式下强制更行
+					||
+					//pkgVer.devVersion > localVer.devVersion
+					true //编辑器模式下强制更新
 #endif
-					;
-				}
+				;
+
 			}
 
 			private HotUpdate.FileVersion[] GetNeedDecompressFiles () {

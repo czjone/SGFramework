@@ -1,0 +1,3 @@
+local GameConf = {}
+
+return GameConf

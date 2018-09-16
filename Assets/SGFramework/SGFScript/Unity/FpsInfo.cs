@@ -15,7 +15,7 @@ namespace DebugInfo {
 
     public class FPS : IInfo {
 
-        public float fpsMeasuringDelta = 0.5f;
+        public float fpsMeasuringDelta = 0.3f;
         private float timePassed;
         private int m_FrameCount = 0;
         private float m_FPS = 0.0f;

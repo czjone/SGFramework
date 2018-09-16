@@ -1,7 +1,8 @@
 namespace SGF {
+    using SGF.Lua;
     using UnityEngine;
     namespace HotUpdate {
-        public class Language : SGF.Core.JsonSerializable<Language> {
+        public class Language : SGF.Unity.JsonSerializable<Language> {
             public string CHECK_DECOMPRESS_PKG_RES_TASK_DES { get; set; }
 
             [System.NonSerialized]

@@ -5,108 +5,80 @@
 	using SGF.Core;
 	using UnityEngine;
 
-	public class ResMgr : System.IDisposable {
+	public abstract class UnityRes {
 
-		// public List<string> SearchPath { get; private set; }
+	}
+
+	public class AssetBundle {
+		public string Name { get; private set; }
+		public UnityEngine.AssetBundle AB { get; private set; }
+		public AssetBundle (string name, UnityEngine.AssetBundle ab) {
+			this.Name = name;
+			this.AB = ab;
+		}
+	}
+
+	public sealed class ResMgr {
+
+		private const bool UsedCache = true;
+
+		public SGF.Core.Dictionary<string, UnityRes> ResCache { get; private set; }
+
+		public SGF.Core.Dictionary<string, AssetBundle> ABCache { get; private set; }
 
 		public ResMgr () {
-
+			this.ResCache = new SGF.Core.Dictionary<string, UnityRes> ();
+			this.ABCache = new SGF.Core.Dictionary<string, AssetBundle> ();
 		}
 
-		public byte[] GetStreamAssetsBytes (string fname) {
-			string path = Application.streamingAssetsPath + Path.DirSplitor + Path.Legalization (fname);
-			if (Application.platform == RuntimePlatform.Android) {
-				using (WWW www = new WWW (path)) {
-					while (!www.isDone) { }
-					if (www.error == null) {
-						return www.bytes;
-					} else {
-						Debug.LogError (www.error + "|" + fname);
-						return null;
-					}
-				}
+		public AssetBundle LoadAssetBundle (string name) {
+			return this.GetAssetBundleWithFileName (name, UsedCache);
+		}
 
+		public void DestoryAssetBundle (AssetBundle ab) {
+			this.DestoryAssetBundle (ab.Name);
+		}
+
+		public void DestoryAssetBundle (string key) {
+			if (this.ABCache.ContainsKey (key) == false) return;
+			var abo = this.ABCache[key] as AssetBundle;
+			if (abo == null) return;
+			ULog.D ("release asset bundle:", key);
+			UnityEngine.AssetBundle.UnloadAllAssetBundles (abo.AB);
+		}
+
+		private AssetBundle LoadAssetBundleWithFile (string name) {
+			var abo = UnityEngine.AssetBundle.LoadFromFile (name);
+			var assetbundle = new AssetBundle (name, abo);
+			return assetbundle;
+		}
+
+		private AssetBundle GetAssetBundleWithFileName (string name, bool cached = false) {
+			if (cached == true) {
+				//set cached.
+				if (this.ABCache.ContainsKey (name) == true) return this.ABCache[name];
+				//load asset bundle.
+				var assetbundle = this.LoadAssetBundle (name);
+				this.ABCache.SetValue (name, assetbundle);
+				return assetbundle;
 			} else {
-				if (!checkFileExist (path)) return null;
-				return System.IO.File.ReadAllBytes (path);
+				// load asset bundle.
+				var abo = UnityEngine.AssetBundle.LoadFromFile (name);
+				var assetbundle = new AssetBundle (name, abo);
+				return assetbundle;
 			}
 		}
 
-		public string GetStreamAssetsString (string fname) {
-			string path = Application.streamingAssetsPath + Path.DirSplitor + Path.Legalization (fname);
-			if (Application.platform == RuntimePlatform.Android) {
-				using (WWW www = new WWW (path)) {
-					while (!www.isDone) { }
-					if (www.error == null) {
-						return www.text;
-					} else {
-						Debug.LogError (www.error + "|" + fname);
-						return null;
-					}
+		public T LoadAsset<T> (string abName, string name) where T : Object {
+			var abo = this.GetAssetBundleWithFileName (abName);
+			if (abo != null) {
+				T asset = abo.AB.LoadAsset<T> (name);
+				if (asset == null) {
+					throw new UnityException ("not found asset {0} with asset bundle {1}.".FormatWith (name, abName));
 				}
-
-			} else {
-				if (!checkFileExist (path)) return null;
-				return System.IO.File.ReadAllText (path);
+				return asset;
 			}
-		}
-
-		public byte[] GetPersistentDataBytes (string fname) {
-			string path = Application.persistentDataPath + Path.DirSplitor + Path.Legalization (fname);
-			if (!checkFileExist (path)) return null;
-			return System.IO.File.ReadAllBytes (path);
-		}
-
-		public string GetPersistentDataString (string fname) {
-			string path = Application.persistentDataPath + Path.DirSplitor + Path.Legalization (fname);
-			if (!checkFileExist (path)) return null;
-			return System.IO.File.ReadAllText (path);
-		}
-
-		public void WritePersistentDataString (string fname, string str) {
-			string path = Application.persistentDataPath + Path.DirSplitor + Path.Legalization (fname);
-			System.IO.File.WriteAllText (path, str);
-		}
-
-		public void WritePersistentDataBytes (string fname, byte[] bytes) {
-			string path = Application.persistentDataPath + Path.DirSplitor + Path.Legalization (fname);
-			string dir = path.Substring (0, path.Length - System.IO.Path.GetFileName (path).Length);
-			System.IO.Directory.CreateDirectory (dir);
-			System.IO.File.WriteAllBytes (path, bytes);
-		}
-
-		public AssetBundle GetAssetsBundleWithBytes (byte[] buf) {
-			AssetBundle ab;
-			using (var stream = new System.IO.MemoryStream (buf)) {
-				ab = AssetBundle.LoadFromStream (stream);
-				stream.Close ();
-			}
-			return ab;
-		}
-
-		public AssetBundle GetAssetsBundleFromStreamAssets (string fname) {
-			byte[] buf = GetStreamAssetsBytes (fname);
-			return GetAssetsBundleWithBytes (buf);
-		}
-
-		public AssetBundle GetAssetsBundleFromPersistentData (string fname) {
-			byte[] buf = GetPersistentDataBytes (fname);
-			return GetAssetsBundleWithBytes (buf);
-		}
-
-		public string GetString (string path) {
-			return this.GetPersistentDataString (path);
-		}
-
-		private bool checkFileExist (string path) {
-			if (System.IO.File.Exists (path) == false) {
-				Debug.Log ("file not found:" + path);
-				return false;
-			} else return true;
-		}
-
-		public void Dispose () {
-			//TODO:: dispose resources.
+			throw new UnityException ("load assetbundle faild:{0}.".FormatWith (abName));
 		}
 	}
 }
