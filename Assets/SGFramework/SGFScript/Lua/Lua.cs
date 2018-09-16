@@ -137,12 +137,13 @@
 		}
 
 		public void DoTick () {
-			var currentTimeMs = System.DateTime.Now.Millisecond;
-			if (msCounter > 0) {
-				var luaDoTick = this.SGFLua.LuaEnv.Global.Get<string,LuaTimeTick> ("LuaTimeTick");
-				luaDoTick.Invoke (currentTimeMs - msCounter);
-			}
-			this.msCounter = currentTimeMs;
+			// var currentTimeMs = System.DateTime.Now.Millisecond;
+			// if (msCounter > 0) {
+			// 	var luaDoTick = this.SGFLua.LuaEnv.Global.Get<string,LuaTimeTick> ("LuaTimeTick");
+			// 	if(luaDoTick == null) throw new LuaException("not set global lua function 'LuaTimeTick' to supports timer tickor!");
+			// 	luaDoTick.Invoke (currentTimeMs - msCounter);
+			// }
+			// this.msCounter = currentTimeMs;
 		}
 	}
 }
