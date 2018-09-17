@@ -71,7 +71,8 @@
 
 			[XLua.DoNotGen]
 			public void Dispose () {
-				this.Lua.Dispose ();
+				this.LuaTick.Stop();
+				// this.Lua.Dispose ();
 			}
 		}
 	}

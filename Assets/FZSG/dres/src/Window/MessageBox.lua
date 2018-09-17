@@ -3,7 +3,7 @@ local MessageBox = class("MessageBox",WinBase);
 
 function MessageBox:ctor()
     MessageBox.super.ctor(self);
-    self:setName("Assets/FZSG/dres/res/Wins/General/MessageBox.prefab");
+    self:setName("Wins.General.MessageBox");
 end
 
 function MessageBox:onUIReady()

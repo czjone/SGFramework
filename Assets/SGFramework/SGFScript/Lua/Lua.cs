@@ -131,12 +131,14 @@
 
 		private SGFLua SGFLua;
 		private System.DateTime preDoTime;
+		private bool isRunning = true;
 
 		public LuaTick (SGFLua lua) {
 			this.SGFLua = lua;
 		}
 
 		public void DoTick () {
+			if(isRunning == false) return;
 			var current = System.DateTime.Now;
 			if (preDoTime != null) {
 				var luaDoTick = this.SGFLua.LuaEnv.Global.Get<string,LuaTimeTick> ("LuaTimeTick");
@@ -145,6 +147,10 @@
 				luaDoTick.Invoke (timespan.Milliseconds);
 			}
 			this.preDoTime = current;
+		}
+
+		public void Stop(){
+			this.isRunning = false;			
 		}
 	}
 }

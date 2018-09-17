@@ -80,6 +80,5 @@
 				return Object2Bytes (this);
 			}
 		}
-
 	}
 }

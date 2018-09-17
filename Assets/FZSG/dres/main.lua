@@ -29,7 +29,7 @@ local function main()
     --- 应用一些常用的设置
     appEnvConfig();
     --- 打开主窗口
-    SGF.WinMgr.open("Window.MainWin");
+    SGF.WinMgr.Open("Window.MainWin");
 end
 main();
 -- local ret,err =  pcall(main);

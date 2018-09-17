@@ -1,6 +1,13 @@
 namespace SGF.Lua.UI {
-
+    using System.Collections.Generic;
+    using UnityEngine.Events;
+    using UnityEngine.EventSystems;
     using UnityEngine;
+    using XLua;
+
+    [XLua.LuaCallCSharp]
+    [XLua.CSharpCallLua]
+    public delegate void UIVent (BaseEventData data);
 
     [XLua.LuaCallCSharp]
     public class UIHelper {
@@ -41,12 +48,7 @@ namespace SGF.Lua.UI {
         }
 
         public GameObject LoadPrefab (string nm) {
-            // #if UNITY_EDITOR
-            var go = GameObject.Instantiate (UnityEditor.AssetDatabase.LoadAssetAtPath<GameObject> (nm));
-            return go;
-            // #else
-            //     return null;
-            // #endif
+            return ResMgr.GetInstance ().LoadPrefab (nm);
         }
 
         public GameObject DeepFindChild (GameObject parent, string name) {
@@ -56,7 +58,7 @@ namespace SGF.Lua.UI {
             return go;
         }
 
-        private static Transform DeepFindChild (Transform root, string childName) {
+        private Transform DeepFindChild (Transform root, string childName) {
             Transform result = null;
             result = root.Find (childName);
             if (result == null) {
@@ -68,6 +70,22 @@ namespace SGF.Lua.UI {
                 }
             }
             return result;
+        }
+
+        public void AddEvent (GameObject gameObject, UIVent lua,
+            UnityEngine.EventSystems.EventTriggerType type = UnityEngine.EventSystems.EventTriggerType.PointerClick) {
+
+            EventTrigger trigger = gameObject.GetComponent<EventTrigger> ();
+            if (trigger == null) trigger = gameObject.AddComponent<EventTrigger> ();
+            trigger.triggers = new List<EventTrigger.Entry> ();
+
+            EventTrigger.Entry entry = new EventTrigger.Entry ();
+            entry.eventID = type;
+            entry.callback = new EventTrigger.TriggerEvent ();
+            UnityAction<BaseEventData> callback = new UnityAction<BaseEventData> (lua.Invoke);
+            entry.callback.AddListener (callback);
+
+            trigger.triggers.Add (entry);
         }
     }
 }

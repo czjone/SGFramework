@@ -51,4 +51,9 @@ function UIUtil.DeepFindChild(parentGo,childnm)
     return UIHelper:DeepFindChild(parentGo,childnm);
 end
 
+function UIUtil.AddEvent(go,callback,type)
+    type = type or CS.UnityEngine.EventSystems.EventTriggerType.PointerClick;--PointerClick;
+    UIHelper:AddEvent(go,callback,type)
+end
+
 return UIUtil;

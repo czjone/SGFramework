@@ -5,12 +5,17 @@ local MainWin = class("MainWin",WinBase);
 
 function MainWin:ctor(...)
     MainWin.super.ctor(self);
-    self:setName("Assets/FZSG/dres/res/Wins/MainWin.prefab");
+    self:setName("Wins.MainWin");
 end
 
 function MainWin:onUIReady()
     MainWin.super.onUIReady();
     self:doTimerCounter();
+    self:initClickEvent();
+end
+
+function MainWin:initClickEvent()
+    UIUtil.AddEvent(self.info,function() self:NativeLoadingWin() end);
 end
 
 function MainWin:doTimerCounter()
@@ -20,11 +25,15 @@ function MainWin:doTimerCounter()
         UIUtil.SetText(self.info, waitSecond .. "秒后开始游戏!");
         waitSecond = waitSecond - 1;
     end
-    local _oncomplate = function()
-        SGF.WinMgr.open("Window.LoadingWin");
-    end
+    local _oncomplate = function() self:NativeLoadingWin() end
     local executeTimes = waitSecond + 1;-- 因为包含0,要多执行一次
-    Timer.setInterval(1000,_doTick,executeTimes,_oncomplate); 
+    self.timer = Timer.setInterval(1000,_doTick,executeTimes,_oncomplate); 
+end
+
+
+function MainWin:NativeLoadingWin()
+    self.timer:stop();
+    SGF.WinMgr.Open("Window.LoadingWin");
 end
 
 return MainWin;

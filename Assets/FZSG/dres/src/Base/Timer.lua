@@ -43,16 +43,16 @@ function Timer:_doTick(timespan)
         -- print(">>>>>>",self._timerCounter,self._timespan,timespan)
         _self._timerCounter = _self._timerCounter + timespan;
         while(_self._timerCounter >  _self._timespan) do
+            if(_self._isStop == true) then 
+                _self:_doComplate(); 
+                return false;
+            end
             -- excecute.
             _self._timerCounter = _self._timerCounter - _self._timespan;
             _self._callfun();
             _self._looptimes = _self._looptimes - 1;
             if(_self._looptimes == 0) then _self._isComplate = true end
             -- check
-            if(_self._isStop == true) then 
-                _self:_doComplate(); 
-                return false;
-            end
             if(_self._isPause == true) then return true end
             if(_self._isComplate == true) then 
                 _self:_doComplate();
@@ -77,6 +77,7 @@ end
 function Timer.setInterval(timespan,callfun,loop,oncomplate)
     local timer = Timer:new(timespan,callfun,loop,oncomplate);
     timer:start();
+    return timer;
 end
 
 return Timer

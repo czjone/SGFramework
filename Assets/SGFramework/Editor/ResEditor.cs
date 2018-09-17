@@ -39,17 +39,22 @@ public class ResEditor {
         return SGF.HotUpdate.PlatForm.UNSUPPORTS;
     }
 
+    // static void BuildAssetsBundle (BuildTarget targetPlatform) {
+    //     var resEditorConfig = ResEditorConfig.LoadWithFile (configPath);
+    //     var resDir = Path.Legalization (resEditorConfig.BuildAssetsPath + "/" + resEditorConfig.BuildResDir);
+    //     SGF.Core.File.CheckDir (resDir, true);
+    //     //编译资源
+    //     BuildPipeline.BuildAssetBundles (resDir, BuildAssetBundleOptions.CompleteAssets, targetPlatform);
+    //     //加密脚本
+    //     var srcPath = Path.Legalization (resEditorConfig.DevScriptDir);
+    //     var tagPath = Path.Legalization (resEditorConfig.BuildAssetsPath + "/" + resEditorConfig.BuildScriptDir);
+    //     BuildScript (srcPath, tagPath);
+    //     Patch_VersionFile (BuildTargetTo (targetPlatform));
+    // }
+
     static void BuildAssetsBundle (BuildTarget targetPlatform) {
-        var resEditorConfig = ResEditorConfig.LoadWithFile (configPath);
-        var resDir = Path.Legalization (resEditorConfig.BuildAssetsPath + "/" + resEditorConfig.BuildResDir);
-        SGF.Core.File.CheckDir (resDir, true);
         //编译资源
-        BuildPipeline.BuildAssetBundles (resDir, BuildAssetBundleOptions.CompleteAssets, targetPlatform);
-        //加密脚本
-        var srcPath = Path.Legalization (resEditorConfig.DevScriptDir);
-        var tagPath = Path.Legalization (resEditorConfig.BuildAssetsPath + "/" + resEditorConfig.BuildScriptDir);
-        BuildScript (srcPath, tagPath);
-        Patch_VersionFile (BuildTargetTo (targetPlatform));
+        BuildPipeline.BuildAssetBundles ("/Users/solyess/Documents/work/Github/SGFramework/OUT_Android", BuildAssetBundleOptions.CompleteAssets, targetPlatform);
     }
 
     [UnityEditor.MenuItem (MenuAssetBuilldRoot + "当前开发平台")]
