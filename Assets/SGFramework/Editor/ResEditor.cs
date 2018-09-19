@@ -39,22 +39,50 @@ public class ResEditor {
         return SGF.HotUpdate.PlatForm.UNSUPPORTS;
     }
 
+    static void BuildAssetsBundle (BuildTarget targetPlatform) {
+        var resEditorConfig = ResEditorConfig.LoadWithFile (configPath);
+        var resDir = Path.Legalization (resEditorConfig.BuildAssetsPath + "/" + resEditorConfig.BuildResDir);
+        SGF.Core.File.CheckDir (resDir, true);
+        //编译资源
+        BuildPipeline.BuildAssetBundles (resDir, BuildAssetBundleOptions.CompleteAssets, targetPlatform);
+        //加密脚本
+        var srcPath = Path.Legalization (resEditorConfig.DevScriptDir);
+        var tagPath = Path.Legalization (resEditorConfig.BuildAssetsPath + "/" + resEditorConfig.BuildScriptDir);
+        BuildScript (srcPath, tagPath);
+        Patch_VersionFile (BuildTargetTo (targetPlatform));
+    }
+
     // static void BuildAssetsBundle (BuildTarget targetPlatform) {
-    //     var resEditorConfig = ResEditorConfig.LoadWithFile (configPath);
-    //     var resDir = Path.Legalization (resEditorConfig.BuildAssetsPath + "/" + resEditorConfig.BuildResDir);
-    //     SGF.Core.File.CheckDir (resDir, true);
     //     //编译资源
-    //     BuildPipeline.BuildAssetBundles (resDir, BuildAssetBundleOptions.CompleteAssets, targetPlatform);
-    //     //加密脚本
-    //     var srcPath = Path.Legalization (resEditorConfig.DevScriptDir);
-    //     var tagPath = Path.Legalization (resEditorConfig.BuildAssetsPath + "/" + resEditorConfig.BuildScriptDir);
-    //     BuildScript (srcPath, tagPath);
-    //     Patch_VersionFile (BuildTargetTo (targetPlatform));
+    //     BuildPipeline.BuildAssetBundles ("/Users/solyess/Documents/work/Github/SGFramework/OUT_Android", BuildAssetBundleOptions.CompleteAssets, targetPlatform);
     // }
 
-    static void BuildAssetsBundle (BuildTarget targetPlatform) {
-        //编译资源
-        BuildPipeline.BuildAssetBundles ("/Users/solyess/Documents/work/Github/SGFramework/OUT_Android", BuildAssetBundleOptions.CompleteAssets, targetPlatform);
+    static AssetBundleBuild[] RefAssetBundleBuild () {
+        AssetBundleBuild[] buildList = new AssetBundleBuild[1];
+        buildList[0].assetBundleName = "bundleDemo";
+        // string[] bundleAssets = new string[50];
+        // // bundleAssets[0] = @"Assets/FZSG/dres/res/Arts/UI/Atlas/ShharedUI.spriteatlas";
+        // bundleAssets[1] = @"Assets/FZSG/dres/res/Arts/UI/Atlas/SICons.spriteatlas";
+        // // bundleAssets[2] = @"Assets/FZSG/dres/res/Arts/UI/Atlas/BaseUI.spriteatlas";
+        // bundleAssets[0] = @"Assets/FZSG/dres/res/Arts/UI/ICons/emoji_0.png";
+        // bundleAssets[1] = @"Assets/FZSG/dres/res/Arts/UI/ICons/emoji_1.png";
+        // bundleAssets[2] = @"Assets/FZSG/dres/res/Arts/UI/ICons/emoji_2.png";
+
+        int count = 50;
+        string[] bundleAssets = new string[count];
+        bundleAssets[0] = @"Assets/FZSG/dres/res/Arts/UI/Atlas/ICons.spriteatlas";
+
+        for (var i = 1; i < count; i++) {
+            bundleAssets[i] = @"Assets/FZSG/dres/res/Arts/UI/ICons/emoji_" + i + ".png";
+        }
+        buildList[0].assetNames = bundleAssets;
+        return buildList;
+    }
+
+    [UnityEditor.MenuItem (MenuAssetBuilldRoot + "资源包测试")]
+    static void BuildAssetsBundleTest () {
+        var buildList = RefAssetBundleBuild();
+        BuildPipeline.BuildAssetBundles ("/Users/solyess/Documents/work/Github/SGFramework/OUT_Android", buildList, BuildAssetBundleOptions.CollectDependencies, BuildTarget.Android);
     }
 
     [UnityEditor.MenuItem (MenuAssetBuilldRoot + "当前开发平台")]

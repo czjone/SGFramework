@@ -1,4 +1,5 @@
 require("Base.Functions")
+require("Base.Table");
 SGF             = SGF or {}
 SGF.WinMgr      = require("Base.WinMgr");
 SGF.Winbase     = require("Base.WinBase");

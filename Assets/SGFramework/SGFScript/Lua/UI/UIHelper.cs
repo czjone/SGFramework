@@ -64,9 +64,8 @@ namespace SGF.Lua.UI {
             if (result == null) {
                 foreach (Transform trs in root) {
                     result = DeepFindChild (trs, childName);
-                    if (result != null) {
+                    if (result != null)
                         return result;
-                    }
                 }
             }
             return result;

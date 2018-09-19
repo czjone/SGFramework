@@ -33,7 +33,8 @@ end
 
 function MainWin:NativeLoadingWin()
     self.timer:stop();
-    SGF.WinMgr.Open("Window.LoadingWin");
+    -- SGF.WinMgr.Open("Window.LoadingWin");
+    SGF.WinMgr.Open("Window.TestWin");
 end
 
 return MainWin;

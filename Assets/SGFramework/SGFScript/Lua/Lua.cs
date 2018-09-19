@@ -2,6 +2,8 @@
 
 	using System.Collections.Generic;
 	using System.Collections;
+	using System.Text;
+	using SGF.Core;
 	using SGF.Security;
 	using UnityEngine;
 	using XLua;
@@ -12,6 +14,15 @@
 
 	[LuaCallCSharp]
 	public class SGFLua : System.IDisposable {
+
+		private readonly List<string> LuaExtentions = new List<string> () {
+			"?.lua",
+			"?.lc",
+			"?.luac",
+			"?/init.lua",
+			"?/init.lc",
+			"?/init.luac",
+		};
 
 		public XLua.LuaEnv LuaEnv { get; private set; }
 
@@ -47,14 +58,27 @@
 		}
 
 		public void AddLuaSearchPath (string searchpath) {
-			//package.path = '/usr/local/share/lua/5.1/?.lua;/home/resty/?/init.lua;'
-			string setSearchPathLua = "package.path = package.path..\";" + searchpath + "/?.lua\"";
-			setSearchPathLua += "package.path = package.path..\";" + searchpath + "/?.lc\"";
-			setSearchPathLua += "package.path = package.path..\";" + searchpath + "/?.luac\"";
-			setSearchPathLua += "package.path = package.path..\";" + searchpath + "/?/init.lua\";";
-			setSearchPathLua += "package.path = package.path..\";" + searchpath + "/?/init.lc\"";
-			setSearchPathLua += "package.path = package.path..\";" + searchpath + "/?/init.luac\"";
-			this.LuaEnv.DoString (setSearchPathLua);
+			// DOC
+			// ------------------------------------------------------------------------------
+			// package.path = '/usr/local/share/lua/5.1/?.lua;/home/resty/?/init.lua;'
+			// string setSearchPathLua = "package.path = package.path..\";" + searchpath + "/?.lua\"";
+			// setSearchPathLua += "package.path = package.path..\";" + searchpath + "/?.lc\"";
+			// setSearchPathLua += "package.path = package.path..\";" + searchpath + "/?.luac\"";
+			// setSearchPathLua += "package.path = package.path..\";" + searchpath + "/?/init.lua\";";
+			// setSearchPathLua += "package.path = package.path..\";" + searchpath + "/?/init.lc\"";
+			// setSearchPathLua += "package.path = package.path..\";" + searchpath + "/?/init.luac\"";
+			// this.LuaEnv.DoString (setSearchPathLua);
+			// ------------------------------------------------------------------------------
+			StringBuilder luaPakagePathSB = new StringBuilder ();
+			foreach (var item in LuaExtentions) {
+				string itrText = "package.path = package.path..\";{0}/{1}\"".FormatWith (searchpath, item);
+				luaPakagePathSB.Append (itrText);
+			}
+			this.LuaEnv.DoString (luaPakagePathSB.ToString ());
+		}
+
+		public void RemoveSearchPath (string searchPath) {
+			//TODO:不实现，实现的逻辑有一点不好理解
 		}
 
 		private byte[] LoadEnctyptionLua (ref string filepath) {
@@ -138,19 +162,19 @@
 		}
 
 		public void DoTick () {
-			if(isRunning == false) return;
+			if (isRunning == false) return;
 			var current = System.DateTime.Now;
 			if (preDoTime != null) {
-				var luaDoTick = this.SGFLua.LuaEnv.Global.Get<string,LuaTimeTick> ("LuaTimeTick");
-				if(luaDoTick == null) throw new LuaException("not set global lua function 'LuaTimeTick' to supports timer tickor!");
+				var luaDoTick = this.SGFLua.LuaEnv.Global.Get<string, LuaTimeTick> ("LuaTimeTick");
+				if (luaDoTick == null) throw new LuaException ("not set global lua function 'LuaTimeTick' to supports timer tickor!");
 				var timespan = current - preDoTime;
 				luaDoTick.Invoke (timespan.Milliseconds);
 			}
 			this.preDoTime = current;
 		}
 
-		public void Stop(){
-			this.isRunning = false;			
+		public void Stop () {
+			this.isRunning = false;
 		}
 	}
 }
