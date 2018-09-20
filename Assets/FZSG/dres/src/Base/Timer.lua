@@ -44,7 +44,7 @@ function Timer:_doTick(timespan)
         _self._timerCounter = _self._timerCounter + timespan;
         while(_self._timerCounter >  _self._timespan) do
             if(_self._isStop == true) then 
-                _self:_doComplate(); 
+                -- _self:_doComplate(); -- 直接停止的不触发完成事件
                 return false;
             end
             -- excecute.

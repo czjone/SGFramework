@@ -3,6 +3,7 @@ local TestWin = class("TestWin",WinBase);
 
 local ItemBase = require("Base.ItemBase");
 local MenuItem = class("MenuItem",ItemBase)
+local UIUtil = require("Base.UIUtil");
 
 function TestWin:ctor()
     TestWin.super.ctor(self);
@@ -12,16 +13,16 @@ end
 function TestWin:onUIReady()
     TestWin.super.onUIReady(self);
     local scroller = self.MenuScroller;
+    scroller:setLayoutType(ScrollerLayoutType.G)
     scroller:setItem(MenuItem);
     scroller:setData({
-        {text = "UI Test"},
-        {text = "Event Test"}
+        {text = "Scroll View Test", testWin = "Window.Test.ScrollerTestWin"},
     });
 end
 ----------------------------------------------------------------
 -- MenuItem
-function MenuItem:ctor()
-    MenuItem.super.ctor(self);
+function MenuItem:ctor(data)
+    MenuItem.super.ctor(self,data);
     self:setName("TestWin.MenuItem");
 end
 
@@ -39,7 +40,10 @@ end
 
 function MenuItem:_refUI(data)
     local uilabel = self.VisibleText;
-    UIUtile.SetText(uilabel,self.data.text);
+    UIUtil.SetText(uilabel,self.data.text);
+    self:addClick(uilabel,function() 
+        SGF.WinMgr.Open(self.data.testWin);
+    end);
 end
 
 return TestWin

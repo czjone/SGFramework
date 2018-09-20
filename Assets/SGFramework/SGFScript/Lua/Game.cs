@@ -7,7 +7,7 @@
 
 		[XLua.LuaCallCSharp]
 		public class Game : System.IDisposable {
-			
+
 			public Lua.ResMgr ResMgr { get; private set; }
 
 			protected MainRootBehaviour RootBehaviour { get; private set; }
@@ -16,7 +16,9 @@
 
 			public SGFLua Lua { get; private set; }
 
-			protected Config Conf {
+			// public HotUpdate HotUpdate { get; private set; }
+
+			public Config Conf {
 				get {
 					return this.RootBehaviour.Conf;
 				}
@@ -41,9 +43,9 @@
 						if (platform == RuntimePlatform.LinuxEditor ||
 							platform == RuntimePlatform.OSXEditor ||
 							platform == RuntimePlatform.WindowsEditor) {
-							_resFullRoot = this.Conf.DevDir + Core.Path.DirSplitor + HotUpdate.TaskDecompressionPKGRes.DresFolder;
+							_resFullRoot = this.Conf.DevDir + Core.Path.DirSplitor + this.Conf.DresRootName;
 						} else {
-							_resFullRoot = Application.persistentDataPath + Core.Path.DirSplitor + HotUpdate.TaskDecompressionPKGRes.DresFolder;
+							_resFullRoot = Application.persistentDataPath + Core.Path.DirSplitor + this.Conf.DresRootName;
 						}
 					}
 					return _resFullRoot;
@@ -54,6 +56,7 @@
 				this.RootBehaviour = rootBehaviour;
 				this.ResMgr = new SGF.Lua.ResMgr ();
 				this.Lua = new SGFLua (this);
+				// this.HotUpdate = new HotUpdate (this);
 				this.LuaTick = new LuaTick (this.Lua);
 			}
 
@@ -71,7 +74,7 @@
 
 			[XLua.DoNotGen]
 			public void Dispose () {
-				this.LuaTick.Stop();
+				this.LuaTick.Stop ();
 				// this.Lua.Dispose ();
 			}
 		}
