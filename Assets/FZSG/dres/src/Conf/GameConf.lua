@@ -1,3 +1,0 @@
-local GameConf = {}
-
-return GameConf
