@@ -10,7 +10,7 @@
 
 			public Lua.ResMgr ResMgr { get; private set; }
 
-			protected MainRootBehaviour RootBehaviour { get; private set; }
+			public MainRootBehaviour RootBehaviour { get; private set; }
 
 			public LuaTick LuaTick { get; private set; }
 

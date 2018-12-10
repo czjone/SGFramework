@@ -87,6 +87,12 @@
 				}
 			}
 
+			public static void WriteFile (string path, byte[] data) {
+				var parRoot = System.IO.Path.GetPathRoot (path);
+				CheckDir (parRoot, true);
+				System.IO.File.WriteAllBytes (path, data);
+			}
+
 			public static string EncryptWithMD5 (string fname) {
 				byte[] sor = System.IO.File.ReadAllBytes (fname);
 				MD5 md5 = MD5.Create ();

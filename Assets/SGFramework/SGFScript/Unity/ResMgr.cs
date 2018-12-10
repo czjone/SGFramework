@@ -22,13 +22,13 @@
 
 		private const bool UsedCache = true;
 
-		public SGF.Core.Dictionary<string, UnityRes> ResCache { get; private set; }
+		public SGF.Core.TDictionary<string, UnityRes> ResCache { get; private set; }
 
-		public SGF.Core.Dictionary<string, AssetBundle> ABCache { get; private set; }
+		public SGF.Core.TDictionary<string, AssetBundle> ABCache { get; private set; }
 
 		public ResMgr () {
-			this.ResCache = new SGF.Core.Dictionary<string, UnityRes> ();
-			this.ABCache = new SGF.Core.Dictionary<string, AssetBundle> ();
+			this.ResCache = new SGF.Core.TDictionary<string, UnityRes> ();
+			this.ABCache = new SGF.Core.TDictionary<string, AssetBundle> ();
 		}
 
 		public AssetBundle LoadAssetBundle (string name) {

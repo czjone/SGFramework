@@ -9,13 +9,13 @@
 	/// </summary>
 	/// <typeparam name="K">key type</typeparam>
 	/// <typeparam name="V">v type</typeparam>
-	public class Dictionary<K, V> {
+	public class TDictionary<K, V> {
 
 		private Hashtable hash;
 
 		public delegate void Action<K, V> (K key, V val);
 
-		public Dictionary () {
+		public TDictionary () {
 			hash = Hashtable.Synchronized (new Hashtable ());
 		}
 
