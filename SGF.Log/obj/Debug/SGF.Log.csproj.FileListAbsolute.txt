@@ -1,0 +1,6 @@
+N:\SGFramework\SGF.Log\obj\Debug\SGF.Log.csprojResolveAssemblyReference.cache
+N:\SGFramework\SGF.Log\bin\Debug\SGF.Log.dll
+N:\SGFramework\SGF.Log\bin\Debug\SGF.Log.pdb
+N:\SGFramework\SGF.Log\bin\Debug\UnityEngine.dll
+N:\SGFramework\SGF.Log\obj\Debug\SGF.Log.dll
+N:\SGFramework\SGF.Log\obj\Debug\SGF.Log.pdb
