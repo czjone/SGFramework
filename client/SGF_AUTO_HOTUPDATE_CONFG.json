@@ -1,0 +1,8 @@
+{
+    "CDN": "http://hotupdate.cnd.com",
+    "DownloadDir": "dres",
+    "PatchsStreamAssetsPath": "dres",
+    "VersionFileName": "version.json",
+    "VersionFilesFileName": "versionFiles.json",
+    "PatchsFileExt": ""
+}
