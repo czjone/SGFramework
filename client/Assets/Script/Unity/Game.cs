@@ -4,6 +4,7 @@
 	using Logger = SGF.Unity.Utils.Logger;
 	using SGF.Unity.GameBooter;
 	using SGF.Unity.Utils;
+	using SGF.Unity.XLuaExt;
 
 	public class Game : MonoBehaviour {
 
@@ -24,13 +25,15 @@
 				IoC.Register (Config.LoadDefaultConfig ());
 			}
 			IoC.Register (new ResMgr (this));
-			IoC.Register (new UIHelper (this));
 			IoC.Register (new HttpHelper (this));
 			IoC.Register (new UIManager (this));
 			IoC.Register (new GameBoot (this));
+			IoC.Register (new Lua (this));
 		}
 
 		void Start () {
+			//输出运行环境
+			PrintEnv();
 			//开始启动
 			var booter = IoC.Get<GameBoot> ();
 			//绑定界面
@@ -44,6 +47,12 @@
 
 		virtual protected GameBootBaseUI BindBootUI (GameBoot booter) {
 			return new GameBootBaseUI (booter);
+		}
+
+		void PrintEnv () {
+			SGF.Unity.Utils.Logger.PrintLog (">>>>>>>>>>>>>>>>>>>>> SGF Game Framework <<<<<<<<<<<<<<<<<<<<<<<<<<");
+			SGF.Unity.Utils.Logger.PrintLog ("XLua Version:V2.1.13");
+			SGF.Unity.Utils.Logger.PrintLog ("scene width:{0} height:{1}".FormatWith (Screen.width, Screen.height));
 		}
 	}
 }

@@ -1,15 +1,25 @@
 {
     "Version": {
-        "VersionCode": 1
+        "VersionCode": 4
     },
     "Files": {
         "keys": [
-            "1d8a3bd742601290652b9f307ed9366c4e052885",
-            "77ddea8f089a882b19db74b20deb89799571d553"
+            "1d8a3bd742601290652b9f307ed9366c4e052885.android",
+            "77ddea8f089a882b19db74b20deb89799571d553.android",
+            "9553e094f6cdeccd77c6f5f57bf282387799dbb2.android",
+            "e7fe6af38c576d5f23bcf685dce411c7216a2a15.android",
+            "ea74709298be2875bca5c9b09c679e376fdef772.android",
+            "fcbd842e5c5664d8a28cf3135bfb22f4c1b7c043.android",
+            "versionFiles.json"
         ],
         "values": [
-            "ec62deae8a1a1b9c5b724a59e93fba560afb052d",
-            "57218c316b6921e2cd61027a2387edc31a2d9471"
+            "78caffd485b9d3838d59769dcfea97f3bad13b5e",
+            "57218c316b6921e2cd61027a2387edc31a2d9471",
+            "2b0095489b4ac498381a7335d89dba8b020e11e8",
+            "36847ae31627179e62be558fb9bfbc6d081d02ec",
+            "3a7310d99d9f3cb6a08eb9c333c39910a18c3d5b",
+            "37b39a2eeb73defca9330bdbf1ea5bf8756398d9",
+            "b11c560401ac5ce26143d3a85631c588bd776a2e"
         ]
     }
 }

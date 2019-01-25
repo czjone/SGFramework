@@ -10,7 +10,7 @@ namespace SGF.Unity.GameBooter {
 
         override protected System.Collections.IEnumerator SynchronousProcessor () {
             yield return null;
-            Logger.PrintSuccess ("LoadLanguageFlow 任务已完成!");
+            // Logger.PrintSuccess ("LoadLanguageFlow 任务已完成!");
             SetComplate ();
         }
     }

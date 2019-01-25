@@ -4,5 +4,5 @@
     "PatchsStreamAssetsPath": "dres",
     "VersionFileName": "version.json",
     "VersionFilesFileName": "versionFiles.json",
-    "PatchsFileExt": ""
+    "PatchsFileExt": ".android"
 }

@@ -9,9 +9,9 @@ using UnityEditor;
 using UnityEngine;
 
 public class BuildLuaEditor {
-	const string BUILD_MENU = "SGFTools/AssetsBundle Manager";
+	const string BUILD_MENU = "SGFTools/编译资源";
 
-	[MenuItem (BUILD_MENU + "/Lua/Build")]
+	[MenuItem (BUILD_MENU + "/编译Lua")]
 	static void BuildLua () {
 		BuildLua (false);
 	}
@@ -51,6 +51,8 @@ public class BuildLuaEditor {
 
 				var tagPath = luaOutPat + fnameHash + outConfig.PatchsFileExt;
 
+				SGF.Core.File.CheckDirWithFile (tagPath);
+
 				System.IO.File.Copy (srcpath, tagPath, true);
 
 				SGF.Unity.Utils.Logger.PrintLog ("[ Build Lua ] :'{0}' --> '{1}'".FormatWith (fname, tagPath));
@@ -63,7 +65,7 @@ public class BuildLuaEditor {
 		AssetDatabase.Refresh ();
 	}
 
-	[MenuItem (BUILD_MENU + "/Lua/Clean")]
+	[MenuItem (BUILD_MENU + "/清理Lua")]
 	static void CleanLuaBuildResult () {
 
 	}

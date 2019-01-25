@@ -81,12 +81,12 @@ namespace SGF.Unity.GameBooter {
         }
 
         void OnBootSuccess () {
-            Logger.PrintSuccess ("游戏启动成功！ ");
+            // Logger.PrintSuccess ("游戏启动成功！ ");
             if (this.OnBootSuccessEvent != null) this.OnBootSuccessEvent (this, GetArgs (null));
         }
 
         void OnPercentChanged (IFlow flow) {
-            Logger.PrintSuccess ("加载进度: " + (flow.Percent * 100).ToString (" 0.00 ") + " %");
+            // Logger.PrintSuccess ("加载进度: " + (flow.Percent * 100).ToString (" 0.00 ") + " %");
             if (this.OnPercentChangedEvent != null) this.OnPercentChangedEvent (this, GetArgs (flow));
         }
     }

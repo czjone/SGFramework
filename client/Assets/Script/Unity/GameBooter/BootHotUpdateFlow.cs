@@ -4,6 +4,7 @@ namespace SGF.Unity.GameBooter {
     using SGFHot = SGF.Unity.HotUpdate;
     using SGF.Unity.HotUpdate;
     using SGF.Unity.Utils;
+    using UnityEngine;
 
     /// <summary> 热更新 </summary>
     public class BootHotUpdateFlow : GameBoofFlowBase {
@@ -19,23 +20,30 @@ namespace SGF.Unity.GameBooter {
         }
 
         override protected System.Collections.IEnumerator SynchronousProcessor () {
-            while (true) {
-                yield return null;
-                if (HotUpdateState != null) {
-                    base.RefPercent (System.Math.Max (1.0f, HotUpdateState.percent));
-                    if (HotUpdateState.step == HotUpdateStep.COMPLATE) {
-                        SetComplate ();
-                        break;
-                    }
+            yield return null;
+            if (Application.isEditor == false) {
+                while (true) {
+                    yield return null;
+                    if (HotUpdateState != null) {
+                        base.RefPercent (System.Math.Max (1.0f, HotUpdateState.percent));
+                        if (HotUpdateState.step == HotUpdateStep.COMPLATE) {
+                            SetComplate ();
+                            break;
+                        }
 
-                    if (HotUpdateState.step == HotUpdateStep.ERROR) {
-                        //TODO:set error.
-                        break;
+                        if (HotUpdateState.step == HotUpdateStep.ERROR) {
+                            //TODO:set error.
+                            break;
+                        }
                     }
                 }
+                IoC.UnRegister (this.hotUpdate);
+                SetComplate ();
+            } else {
+                this.HotUpdateState = new OnHotUpdateStateChangedArgs ();
+                SetComplate ();
             }
-            IoC.UnRegister (this.hotUpdate);
-            Logger.PrintSuccess ("资源更新完成!");
+            // SGF.Unity.Utils.Logger.PrintSuccess ("资源更新完成!");
         }
 
     }

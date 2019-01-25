@@ -83,8 +83,8 @@
      <Compile Include="Assets\Script\Unity\Utils\GameObjectExtentions.cs" />
      <Compile Include="Assets\Script\Unity\Utils\HttpDownload.cs" />
      <Compile Include="Assets\Script\Unity\Utils\Log.cs" />
+     <Compile Include="Assets\Script\Unity\Utils\PrefabsHelper.cs" />
      <Compile Include="Assets\Script\Unity\Utils\ResMgr.cs" />
-     <Compile Include="Assets\Script\Unity\Utils\UIHelper.cs" />
      <Compile Include="Assets\Script\Unity\Utils\UIManager.cs" />
      <Compile Include="Assets\Script\Unity\Utils\UITextHelper.cs" />
      <Compile Include="Assets\XLua\Examples\01_Helloworld\Helloworld.cs" />

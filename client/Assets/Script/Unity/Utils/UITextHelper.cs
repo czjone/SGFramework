@@ -16,6 +16,7 @@ namespace SGF.Unity.Utils {
         public static UnityEngine.UI.Text SetText (this UnityEngine.UI.Text text, string val) {
             return setText (text, val);
         }
+        
         public static UnityEngine.UI.Text SetText (this GameObject go, string val) {
             var text = go.GetComponent<UnityEngine.UI.Text> ();
             return setText (text, val);

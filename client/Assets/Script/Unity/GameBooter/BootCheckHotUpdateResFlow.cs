@@ -11,7 +11,7 @@ namespace SGF.Unity.GameBooter {
 
         override protected System.Collections.IEnumerator SynchronousProcessor () {
             yield return null;
-            Logger.PrintSuccess ("CheckHotUpdateResFlow 任务已完成!");
+            // Logger.PrintSuccess ("CheckHotUpdateResFlow 任务已完成!");
             SetComplate ();
         }
     }

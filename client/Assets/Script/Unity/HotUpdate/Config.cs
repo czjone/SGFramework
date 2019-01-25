@@ -8,6 +8,6 @@ namespace SGF.Unity.HotUpdate {
         public string PatchsStreamAssetsPath = "dres"; //打到包中的资源
         public string VersionFileName = "version.json"; //版本描述文件
         public string VersionFilesFileName = "versionFiles.json"; //版本描述文件
-        public string PatchsFileExt = ""; //生成的补丁的文件包扩展
+        public string PatchsFileExt = ".android"; //生成的补丁的文件包扩展 为了区分,android用android,ios 用ios,wind 用win
     }
 }

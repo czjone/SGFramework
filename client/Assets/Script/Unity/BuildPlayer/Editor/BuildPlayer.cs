@@ -10,17 +10,17 @@ public class BuildPlayer {
 
 	const string BUILD_MENU = "SGFTools";
 
-	[MenuItem (BUILD_MENU + "/Build Player/Build Android Player")]
+	[MenuItem (BUILD_MENU + "/打运行包/APK")]
 	static void BuildAndroidPlayer () {
 		BuildTargetPlayer (BuildTarget.Android);
 	}
 
-	[MenuItem (BUILD_MENU + "/Build Player/Build IosProject")]
+	[MenuItem (BUILD_MENU + "/打运行包/XCode工程")]
 	static void BuildIosProject () {
 		BuildTargetPlayer (BuildTarget.iOS);
 	}
 
-	[MenuItem (BUILD_MENU + "/Build Player/Build Windows Player")]
+	[MenuItem (BUILD_MENU + "/打运行包/Win运行包")]
 	static void BuildWindowsPlayer () {
 		BuildTargetPlayer (BuildTarget.StandaloneWindows);
 	}
@@ -45,7 +45,7 @@ public class BuildPlayer {
 		BuildSummary summary = report.summary;
 
 		if (summary.result == BuildResult.Succeeded) {
-			Debug.Log ("Build succeeded: " + summary.totalSize + " bytes");
+			Debug.Log ("Build success: " + summary.totalSize + " bytes");
 		}
 
 		if (summary.result == BuildResult.Failed) {

@@ -40,8 +40,9 @@ namespace SGF.Unity.HotUpdate {
         }
 
         private void LoadConfig () {
-            var json = IoC.Get<ResMgr> ().loadJson ("conf.json");
-            conf = Config.LoadWithJson (json);
+            // var json = IoC.Get<ResMgr> ().LoadJsonFromResources ("conf.json");
+            // conf = Config.LoadWithJson (json);
+            conf = IoC.Get<ResMgr> ().LoadFromJson<Config> ("config");
         }
 
         public bool CheckVersion () {

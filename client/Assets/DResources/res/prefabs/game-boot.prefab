@@ -27,7 +27,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1235269384351902
 GameObject:
   m_ObjectHideFlags: 1
@@ -289,7 +289,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.297
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -408,7 +408,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u6536\u96C6\u8D44\u6E90\u53EF\u4EE5\u7528\u6765\u5408\u6210\u9AD8\u7EA7\u88C5\u5907"
+  m_Text: 
 --- !u!114 &114647838069770072
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -468,7 +468,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u6B63\u5728\u68C0\u67E5\u8D44\u6E90 (80\x03/1590\x03) "
+  m_Text: "\u542F\u52A8\u6E38\u620F(0.00%)"
 --- !u!222 &222152113403093798
 CanvasRenderer:
   m_ObjectHideFlags: 1

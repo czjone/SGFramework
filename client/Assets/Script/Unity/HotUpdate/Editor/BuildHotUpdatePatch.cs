@@ -9,7 +9,7 @@ using UnityEditor;
 using UnityEngine;
 
 public class BuildHotUpdatePatch {
-	const string BUILD_MENU = "SGFTools/AssetsBundle Manager";
+	const string BUILD_MENU = "SGFTools/补丁工具";
 	static readonly string HOT_UPDATE_CONFIG = Application.streamingAssetsPath + "/../../SGF_AUTO_HOTUPDATE_CONFG.json";
 
 	public static SGF.Unity.HotUpdate.Config GetHotUpdateConfig () {
@@ -23,7 +23,7 @@ public class BuildHotUpdatePatch {
 		return cfg;
 	}
 
-	[MenuItem (BUILD_MENU + "/Build Patchs")]
+	[MenuItem (BUILD_MENU + "/编译全部补丁")]
 	public static void BuildPatchs () {
 
 		var conf = GetHotUpdateConfig ();
@@ -43,13 +43,13 @@ public class BuildHotUpdatePatch {
 		AssetDatabase.Refresh ();
 	}
 
-	[MenuItem (BUILD_MENU + "/ReBuild Patchs")]
+	[MenuItem (BUILD_MENU + "/重新打全部补丁")]
 	public  static void ReBuildPatchs () {
 		CleanPatchs ();
 		BuildPatchs ();
 	}
 
-	[MenuItem (BUILD_MENU + "/Clean Patchs")]
+	[MenuItem (BUILD_MENU + "/清理补丁")]
 	public static void CleanPatchs () {
 
 	}

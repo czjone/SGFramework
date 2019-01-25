@@ -1,6 +1,7 @@
+using SGF.Core;
 using UnityEngine;
 
-namespace SGF.Unity.Utils  {
+namespace SGF.Unity.Utils {
     public class UIManager {
         private Game game;
         private GameObject UIRoot;
@@ -22,6 +23,33 @@ namespace SGF.Unity.Utils  {
             set {
                 this.UIRoot = value;
             }
+        }
+
+        public GameObject Open (string uiname) {
+            var go = PrefabsHelper.CreateUI (this.Root, toResName (uiname));
+            go.name = toUIname (uiname);
+            go.SetUIParent (Root);
+            return go;
+        }
+
+        public void Close (string uiname, bool destory = true) {
+            var go = this.Root.FindChildWithTagName (uiname);
+            this.Close (go);
+        }
+
+        public void Close (GameObject go, bool destory = true) {
+            go.SetUIParent (null);
+            if (destory == true) {
+                GameObject.DestroyImmediate (go);
+            }
+        }
+
+        private static string toUIname (string name) {
+            return name.Replace ("/", "->");
+        }
+
+        private static string toResName (string uiname) {
+            return uiname.Replace ("->", "/");
         }
     }
 }

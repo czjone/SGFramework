@@ -82,12 +82,9 @@
 			/// <returns></returns>
 			public static bool CheckDir (string dir, bool isNotExistCreate = false) {
 				if (Directory.Exists (dir) == true) return true;
-				if (dir.StartsWith (Application.persistentDataPath) == true) {
-					dir.Replace (Application.persistentDataPath, "");
-				}
 				dir = dir.Replace ("\\", "/");
 				var dirs = dir.Split ('/');
-				StringBuilder dirsb = new StringBuilder (Application.dataPath);
+				StringBuilder dirsb = new StringBuilder ();
 				foreach (var folder in dirs) {
 					dirsb.Append ("/");
 					dirsb.Append (folder);
@@ -105,9 +102,23 @@
 			}  
 
 			public static string GetParentDir (string path) {
-				if (path.Contains ("\\"))
-					return path.Substring (0, path.LastIndexOf ("\\"));  
-				return path.Substring (0, path.LastIndexOf ("/"));        
+				var index = -1;
+				if (path.Contains ("\\")) {
+					index = path.LastIndexOf ("\\");
+				} else {
+					index = path.LastIndexOf ("/");
+				}
+				return path.Substring (0, index);        
+			}
+
+			public static string GetFileName (string path) {
+				var index = -1;
+				if (path.Contains ("\\")) {
+					index = path.LastIndexOf ("\\");
+				} else {
+					index = path.LastIndexOf ("/");
+				}
+				return path.Substring (index + 1, path.Length - index - 1);        
 			}
 
 			public static void WriteFile (string path, byte[] data) {

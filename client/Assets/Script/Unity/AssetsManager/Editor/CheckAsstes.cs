@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 public class CheckAsstes {
 	const string BUILD_MENU = "SGFTools";
 
-	[MenuItem (BUILD_MENU + "/Check Assets/Check UITexture setting")]
+	[MenuItem (BUILD_MENU + "/检查资源/检查UI资源设置")]
 	static void CheckUITextures () {
 		
 	}

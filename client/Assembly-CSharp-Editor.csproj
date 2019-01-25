@@ -53,9 +53,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Script\Unity\AssetsManager\Editor\BuildAssetsBundles.cs" />
+     <Compile Include="Assets\Script\Unity\AssetsManager\Editor\BuildPlayerAssetsbundle.cs" />
      <Compile Include="Assets\Script\Unity\AssetsManager\Editor\CheckAsstes.cs" />
-     <Compile Include="Assets\Script\Unity\AssetsManager\Editor\CheckUITextureSetting.cs" />
      <Compile Include="Assets\Script\Unity\BuildPlayer\Editor\BuildPlayer.cs" />
      <Compile Include="Assets\Script\Unity\Console\Editor\ConsoleEditorWindow.cs" />
      <Compile Include="Assets\Script\Unity\HotUpdate\Editor\BuildHotUpdatePatch.cs" />
