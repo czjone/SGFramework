@@ -1,0 +1,14 @@
+dep libs:
+	boost:https://github.com/czjone/boost.git
+	kcp:https://github.com/czjone/kcp.git
+	flatbuffer:https://github.com/czjone/flatbuffers.git
+
+
+
+
+
+
+
+
+
+

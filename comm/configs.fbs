@@ -1,0 +1,24 @@
+//
+namespace SGFGameConfigs;
+attribute "priority";
+
+table GameSvrConfig{ 
+	host:string; 
+	port:string;
+	db:string;
+}
+
+table LoginSvrConfig{ 
+	host:string; 
+	port:string;
+	db:string;
+}
+
+
+table PublicSvrConfig{ 
+	host:string; 
+	port:string;
+	db:string;
+}
+
+root_type GameSvrConfig;

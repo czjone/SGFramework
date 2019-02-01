@@ -1,0 +1,2 @@
+/usr/bin/ar cr libSGFramework.a  CMakeFiles/SGFramework.dir/framework/core/modues.cpp.o CMakeFiles/SGFramework.dir/framework/core/kcp/ikcp.c.o CMakeFiles/SGFramework.dir/framework/core/log/log.cpp.o CMakeFiles/SGFramework.dir/framework/core/net/tcp.cpp.o CMakeFiles/SGFramework.dir/framework/core/net/session.cpp.o
+/usr/bin/ranlib libSGFramework.a

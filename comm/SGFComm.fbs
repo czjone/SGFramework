@@ -1,0 +1,31 @@
+//
+namespace SGFComm;
+attribute "priority";
+////////////////////////////// login ////////////////////////
+table CL_LS_Login{ 
+	accounts:string; 
+	password:string;
+	nicename:string;
+}
+
+table CL_GS_Login{ 
+	token:string;
+}
+
+
+////////////////////////////// server list /////////////////
+
+enum ServerStatus : byte { Normal = 1, Close=2, Busy =3, Msaintenance =4}
+
+table Server {
+	id:string;
+	name:string;
+	des:string;
+	status:ServerStatus = Normal;
+}
+
+table LS_CL_ServerList {
+	Servers:[Server];
+}
+
+root_type CL_LS_Login;
