@@ -1,9 +1,0 @@
-﻿require "src.core.init"
-require "src.config"
-
--- 检查日志开关
-enable_print(conf.log)
--- app启动入口
-local function main() print("TODO::加载游戏主界面!"); end
--- traceback在function中定义.
-xpcall(main, traceback)
